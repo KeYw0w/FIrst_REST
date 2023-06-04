@@ -1,10 +1,6 @@
-package com.lab.webapp.Entity;
+package com.lab.webapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.attoparser.IDocumentHandler;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,8 +9,9 @@ import javax.persistence.*;
 @Entity
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "documents_vacations")
-public class document_vacation {
+public class DocumentVacation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_document")
@@ -29,14 +26,13 @@ public class document_vacation {
     private String end_date;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_employee")
-    private employee employeeId;
+    private Employee employee;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_vacation",referencedColumnName = "id_vacation"    )
-    private vacation vacationId;
+    @JoinColumn(name = "id_vacation")
+    private Vacation vacation;
 
 
-    public document_vacation() {
-    }
+
 
 
 }

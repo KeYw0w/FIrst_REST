@@ -1,8 +1,8 @@
 package com.lab.webapp.controller;
 
-import com.lab.webapp.Entity.document_vacation;
-import com.lab.webapp.Entity.employee;
-import com.lab.webapp.dao.employeeRepo;
+import com.lab.webapp.entity.DocumentVacation;
+import com.lab.webapp.entity.Employee;
+import com.lab.webapp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +15,9 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Controller
-public class employeeDTO {
+public class EmployeeController {
     @Autowired
-    private employeeRepo employee_repo;
+    private EmployeeRepository employee_repo;
 
     @GetMapping({"/listempl", "/empl"})
     public ModelAndView getallEmployees() {
@@ -34,7 +34,7 @@ public class employeeDTO {
 //    }
 
     @PostMapping("/saveemployee")
-    public String saveemployee(@ModelAttribute employee employee_d) {
+    public String saveemployee(@ModelAttribute Employee employee_d) {
         employee_repo.save(employee_d);
         return "redirect:/list";
 
@@ -43,8 +43,8 @@ public class employeeDTO {
     @GetMapping("/showUpdateFormEmpl")
     public ModelAndView showUpdateForm(@RequestParam long employeeId) {
         ModelAndView mav = new ModelAndView("add-vacation-form");
-        Optional<employee> optionalEmployee = employee_repo.findById(employeeId);
-        employee Employee = new employee();
+        Optional<Employee> optionalEmployee = employee_repo.findById(employeeId);
+        Employee Employee = new Employee();
         if (optionalEmployee.isPresent()) {
             Employee = optionalEmployee.get();
 
@@ -60,7 +60,7 @@ public class employeeDTO {
         return "redirect:/list";
     }
     @PostMapping("/saveEmployee")
-    public String saveDocument(@ModelAttribute employee employee) {
+    public String saveDocument(@ModelAttribute Employee employee) {
 
         employee_repo.save(employee);
         return "redirect:/list";
@@ -68,7 +68,7 @@ public class employeeDTO {
     @GetMapping("/addEmployee")
     public ModelAndView addEmployeeForm() {
         ModelAndView mav = new ModelAndView("add-employee-form");
-        document_vacation vacation_d = new document_vacation();
+        DocumentVacation vacation_d = new DocumentVacation();
         mav.addObject("document_vacation", vacation_d);
         return mav;
     }
