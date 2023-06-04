@@ -1,0 +1,49 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>List Students</title>
+
+  <link rel="stylesheet"
+        type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+        crossorigin="anonymous" />
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>List Employees</h3>
+
+  <hr/>
+  <a th:href="@{/addDocumentForm}" class="btn btn-primary">Add Employee</a>
+  <br/><br/>
+  <table class="table table-bordered table-striped" id="employeesTable">
+
+    <thead>
+    <tr>
+      <th>first_name</th>
+      <th>second_name</th>
+      <th>patronymic</th>
+      <th>position</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${employees}">
+      <th th:text="${student.first_name}" />
+      <th th:text="${student.second_name}" />
+      <th th:text="${student.patronymic}" />
+      <th th:text="${student.position}" />
+      <td>
+        <a th:href="@{/showUpdateFormEmpl(employeeId=${student.id})}" class="btn btn-info">Update</a>
+
+        <a th:href="@{/deleteEmployee(employeeId=${student.id})}" class="btn btn-danger ml-2">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+</div>

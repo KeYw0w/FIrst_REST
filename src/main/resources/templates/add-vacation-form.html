@@ -1,0 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Add Vacation</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+
+  <h3>Add New Vacation</h3>
+  <hr/>
+
+  <form th:action="@{/saveVacation}" th:object="${vacation}" method="POST">
+
+    <input type="text" th:field="*{type_vacation}" class="form-control col-4 mb-4" placeholder="Enter type vacation"/>
+
+    <input type="text" th:field="*{payment_vacation}" class="form-control col-4 mb-4" placeholder="Enter payment vacation"/>
+
+    <input type="text" th:field="*{vacation_benefits}" class="form-control col-4 mb-4" placeholder="Enter vacation benefits"/>
+
+<!--    <input type="text" th:field="*{position}" class="form-control col-4 mb-4" placeholder="Enter Date End"/>-->
+<!--    <input type="text" th:field="*{department}" class="form-control col-4 mb-4" placeholder="Enter ID Employee"/>-->
+<!--    <input type="text" th:field="*{emplooyment_date}" class="form-control col-4 mb-4" placeholder="Enter id vacation"/>-->
+
+
+    <button type="submit" class="btn btn-primary col-2">Save</button>
+
+    <input type="hidden" th:field="*{id}"/>
+
+  </form>
+  <hr/>
+  <a th:href="@{/listvac}">Back to list</a>
+</div>
+
+</body>
+</html>
