@@ -4,6 +4,7 @@ import com.lab.webapp.entity.DocumentVacation;
 import com.lab.webapp.entity.Employee;
 import com.lab.webapp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collections;
-import java.util.Optional;
+import javax.print.Doc;
+import java.util.*;
+
+import static org.springframework.util.ClassUtils.isPresent;
 
 @Controller
 public class EmployeeController {
@@ -33,44 +36,64 @@ public class EmployeeController {
 //        return mav;
 //    }
 
-    @PostMapping("/saveemployee")
-    public String saveemployee(@ModelAttribute Employee employee_d) {
-        employee_repo.save(employee_d);
-        return "redirect:/list";
-
-    }
-
-    @GetMapping("/showUpdateFormEmpl")
-    public ModelAndView showUpdateForm(@RequestParam long employeeId) {
-        ModelAndView mav = new ModelAndView("add-vacation-form");
-        Optional<Employee> optionalEmployee = employee_repo.findById(employeeId);
-        Employee Employee = new Employee();
-        if (optionalEmployee.isPresent()) {
-            Employee = optionalEmployee.get();
-
-        }
-        mav.addObject("employees", Employee);
-        return mav;
-    }
 
     @GetMapping("/deleteEmployee")
-    public String deleteDocument(@RequestParam Long employeeId) {
+    public String deleteDocument(@RequestParam Long EmployeeId) {
 
-        employee_repo.deleteAllById(Collections.singleton(employeeId));
-        return "redirect:/list";
+        employee_repo.deleteAllById(Collections.singleton(EmployeeId));
+        return "redirect:/listempl";
     }
+
     @PostMapping("/saveEmployee")
     public String saveDocument(@ModelAttribute Employee employee) {
 
         employee_repo.save(employee);
-        return "redirect:/list";
+        return "redirect:/listempl";
     }
+
     @GetMapping("/addEmployee")
     public ModelAndView addEmployeeForm() {
         ModelAndView mav = new ModelAndView("add-employee-form");
-        DocumentVacation vacation_d = new DocumentVacation();
-        mav.addObject("document_vacation", vacation_d);
+        Employee employee = new Employee();
+        mav.addObject("Employee", employee);
         return mav;
     }
 
+    @GetMapping("/showUpdateFormEmpl")
+    public ModelAndView ShowUpdateFormEmployee(@RequestParam long EmployeeId) {
+        ModelAndView mav = new ModelAndView("add-employee-form");
+        Optional<Employee> optionalEmployee;
+        optionalEmployee = employee_repo.findById(EmployeeId);
+        Employee employee = new Employee();
+        if (optionalEmployee.isPresent()) {
+            employee = optionalEmployee.get();
+
+        }
+        mav.addObject("Employee", employee);
+        return mav;
+    }
+
+    @GetMapping("/ShowEmployeesDocs")
+    public ModelAndView ShowDocs(@RequestParam long EmployeeId) {
+        Optional<Employee> optionalEmployee;
+        Employee employee = new Employee();
+        ModelAndView mav = new ModelAndView("list-employeesDocs");
+
+        optionalEmployee = employee_repo.findById(EmployeeId);
+        if (optionalEmployee.isPresent()) {
+            employee = optionalEmployee.get();
+
+        }
+        List<DocumentVacation> documents = null;
+
+//        mav.addObject("document", );
+        documents = employee.getDocuments();
+//        for (int i = 0; i<documents.size();i++){
+        mav.addObject("listOfDocuments",documents);
+//            mav.addObject("list",documents.get(i));
+//        }
+//        documents.forEach(s -> mav.addObject("document",));
+
+        return mav;
+    }
 }

@@ -19,16 +19,18 @@
     <h3>List Students</h3>
 
     <hr/>
-    <a th:href="@{/addDocumentForm}" class="btn btn-primary">Add Student</a>
+    <a th:href="@{/addDocumentForm}" class="btn btn-primary">Add Document</a>
+    <a th:href="@{/listempl}" class="btn btn-primary">List All Employees</a>
+    <a th:href="@{/listvac}" class="btn btn-primary">List All Vacations</a>
     <br/><br/>
     <table class="table table-bordered table-striped" id="studentTable">
 
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Faculty</th>
-            <th>Age</th>
+            <th>ID</th>
+            <th>Register Date</th>
+            <th>Date end</th>
+            <th>ID of vacation</th>
         </tr>
         </thead>
         <tbody>

@@ -16,10 +16,12 @@
 
 <div class="container">
 
-  <h3>List Employees</h3>
+  <h3>Employees</h3>
 
   <hr/>
-  <a th:href="@{/addDocumentForm}" class="btn btn-primary">Add Employee</a>
+  <a th:href="@{/addEmployee}" class="btn btn-primary">Add Employee</a>
+  <a th:href="@{/list}" class="btn btn-primary">List All Documents</a>
+  <a th:href="@{/listvac}" class="btn btn-primary">List All Vacations</a>
   <br/><br/>
   <table class="table table-bordered table-striped" id="employeesTable">
 
@@ -33,14 +35,15 @@
     </thead>
     <tbody>
     <tr th:each="student: ${employees}">
-      <th th:text="${student.first_name}" />
-      <th th:text="${student.second_name}" />
+      <th th:text="${student.firstName}" />
+      <th th:text="${student.secondName}" />
       <th th:text="${student.patronymic}" />
       <th th:text="${student.position}" />
       <td>
-        <a th:href="@{/showUpdateFormEmpl(employeeId=${student.id})}" class="btn btn-info">Update</a>
+        <a th:href="@{/showUpdateFormEmpl(EmployeeId=${student.id})}" class="btn btn-info">Update</a>
 
-        <a th:href="@{/deleteEmployee(employeeId=${student.id})}" class="btn btn-danger ml-2">Delete</a>
+        <a th:href="@{/deleteEmployee(EmployeeId=${student.id})}" class="btn btn-danger ml-2">Delete</a>
+        <a th:href="@{/ShowEmployeesDocs(EmployeeId=${student.id})}" class="btn btn-danger ml-2">Documents</a>
       </td>
     </tr>
     </tbody>

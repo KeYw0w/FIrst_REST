@@ -24,10 +24,10 @@ public class DocumentVacation {
     private String start_date;
     @Column(name = "date_end")
     private String end_date;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_employee")
     private Employee employee;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_vacation")
     private Vacation vacation;
 

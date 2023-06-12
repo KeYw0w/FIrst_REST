@@ -1,0 +1,48 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>List Employee's Documents</title>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>List Employee's Documents</h3>
+
+    <hr/>
+    <a th:href="@{/listempl}" class="btn btn-primary">List Employees</a>
+    <a th:href="@{/list}" class="btn btn-primary">List All Documents</a>
+    <a th:href="@{/listvac}" class="btn btn-primary">List All Vacations</a>
+
+    <br/><br/>
+    <table class="table table-bordered table-striped" id="employeesTable">
+
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student: ${listOfDocuments}">
+            <th th:text="${student.getNumber()}" />
+            <th th:text="${student.getStart_date()}" />
+            <th th:text="${student.getEnd_date()}" />
+            <th th:text="${student.getId()}" />
+
+        </tr>
+        </tbody>
+
+    </table>
+</div>
